@@ -46,6 +46,7 @@ class SEMDataTrain(Dataset):
         img_as_img = Image.open(single_image_name)
         # img_as_img.show()
         img_as_np = np.asarray(img_as_img)
+        print("0:",img_as_np.shape)
 
         # Augmentation
         # flip {0: vertical, 1: horizontal, 2: both, 3: none}
@@ -74,6 +75,7 @@ class SEMDataTrain(Dataset):
         # Crop the image
         img_height, img_width = img_as_np.shape[0], img_as_np.shape[1]
         pad_size = int((self.in_size - self.out_size)/2)
+        print("5:",img_as_np.shape)
         img_as_np = np.pad(img_as_np, pad_size, mode="symmetric")
         y_loc, x_loc = randint(0, img_height-self.out_size), randint(0, img_width-self.out_size)
         print("1:",img_as_np.shape)
