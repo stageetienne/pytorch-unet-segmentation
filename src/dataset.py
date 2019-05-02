@@ -49,11 +49,11 @@ class SEMDataTrain(Dataset):
 
         # Augmentation
         # flip {0: vertical, 1: horizontal, 2: both, 3: none}
-        flip_num = randint(0, 3)
+        flip_num = randint(0, 4)
         img_as_np = flip(img_as_np, flip_num)
 
         # Noise Determine {0: Gaussian_noise, 1: uniform_noise
-        if randint(0, 1):
+        if randint(0, 2):
             # Gaussian_noise
             gaus_sd, gaus_mean = randint(0, 20), 0
             img_as_np = add_gaussian_noise(img_as_np, gaus_mean, gaus_sd)
@@ -76,6 +76,7 @@ class SEMDataTrain(Dataset):
         pad_size = int((self.in_size - self.out_size)/2)
         img_as_np = np.pad(img_as_np, pad_size, mode="symmetric")
         y_loc, x_loc = randint(0, img_height-self.out_size), randint(0, img_width-self.out_size)
+        print("1:",img_as_np.shape)
         img_as_np = cropping(img_as_np, crop_size=self.in_size, dim1=y_loc, dim2=x_loc)
         '''
         # Sanity Check for image
@@ -83,8 +84,11 @@ class SEMDataTrain(Dataset):
         img1.show()
         '''
         # Normalize the image
+        print("2:",img_as_np.shape)
         img_as_np = normalization2(img_as_np, max=1, min=0)
+        print("3:",img_as_np.shape)
         img_as_np = np.expand_dims(img_as_np, axis=0)  # add additional dimension
+        print("4:",img_as_np.shape)
         img_as_tensor = torch.from_numpy(img_as_np).float()  # Convert numpy array to tensor
 
         """
