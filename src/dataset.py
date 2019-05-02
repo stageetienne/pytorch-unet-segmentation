@@ -112,7 +112,9 @@ class SEMDataTrain(Dataset):
         msk_as_np = approximate_image(msk_as_np)  # images only with 0 and 255
 
         # Crop the mask
+        print("m1:",msk_as_np.shape)
         msk_as_np = cropping(msk_as_np, crop_size=self.out_size, dim1=y_loc, dim2=x_loc)
+        print("m2:",msk_as_np.shape)
         '''
         # Sanity Check for mask
         img2 = Image.fromarray(msk_as_np)
