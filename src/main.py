@@ -38,14 +38,13 @@ if __name__ == "__main__":
     # Model
     model = CleanU_Net(in_channels=1, out_channels=2)
     #model = CleanU_Net()
-    model = torch.nn.DataParallel(model, device_ids=list(
-        range(torch.cuda.device_count()))).cuda()
+    #model = torch.nn.DataParallel(model, device_ids=list(range(torch.cuda.device_count()))).cuda()
 
     # Loss function
     criterion = nn.CrossEntropyLoss()
 
     # Optimizerd
-    optimizer = torch.optim.RMSprop(model.module.parameters(), lr=0.001)
+    optimizer = torch.optim.RMSprop(model.parameters(), lr=0.001)
 
     # Parameters
     epoch_start = 0
