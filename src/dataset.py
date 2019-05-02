@@ -24,7 +24,9 @@ class SEMDataTrain(Dataset):
         """
         # all file names
         self.mask_arr = glob.glob(str(mask_path) + "/*")
+        print("mask data len",len(self.mask_arr))
         self.image_arr = glob.glob(str(image_path) + str("/*"))
+        print("image data len",len(self.image_arr))
         self.in_size, self.out_size = in_size, out_size
         # Calculate len
         self.data_len = len(self.mask_arr)
